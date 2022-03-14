@@ -10,6 +10,7 @@ import {
   } from "./types"
   
   const initialState = {
+    id: '',
     email: "",
     name: "",
     registered:false,
@@ -32,15 +33,18 @@ import {
       case LOGIN_USER_SUCCESS:
         return {
           ...state,
-          email: payload,
+          id: payload.id,
+          name: payload.username,
+          email: payload.email,
           isAuthenticated: true,
+          registered: false,
         }
         
       case REGISTER_USER_SUCCESS:
         return {
           ...state,
           name: payload,
-          registered: true
+          registered: true,
         }
       case API_ERROR:
         return {
@@ -50,6 +54,9 @@ import {
       case LOGOUT_USER_SUCCESS:
         return {
           ...state,
+          id: '',
+          name: '',
+          email: '',
           isAuthenticated: false,
           registered: false
         }

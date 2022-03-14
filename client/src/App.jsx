@@ -1,13 +1,13 @@
 import { Header, Form, Dashboard } from "./components"
 import { Navigate, Route, Routes } from "react-router-dom"
-
+import RequireAuth from "./ProtectedRoute"
 const App = () => {
   return (
     <>
       <Routes>
         <Route exact path="/" element={<Form title="Log in" />} />
         <Route exact path="/signup" element={<Form title="Sign Up" />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/dashboard" element={<RequireAuth />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </>

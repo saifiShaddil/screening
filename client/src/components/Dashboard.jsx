@@ -1,14 +1,13 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { connect } from "react-redux"
 import BarChart from "./Charts/BarChart"
 import PieChart from "./Charts/PieChart"
 
-const Dashboard = () => {
-  const user = useSelector((state) => state.authReducer)
+const Dashboard = (user) => {
   return (
     <div className="w-full h-screen bg-fixed top-0 p-5 ml-auto mr-auto bg-gray-100">
       <h1 className="text-[#001747] text-3xl font-semibold flex justify-center items-center">
-        Welcome {user?.name || user?.email}
+        Welcome {user?.name}
       </h1>
       <hr className="my-2 rounded-lg h-1 bg-gray-400" style={{}} />
       <div className="flex flex-col md:flex-row justify-around items-center gap-6">
@@ -23,4 +22,10 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+const mapStateToProps = (state) => {
+  return {
+    user: state.authReducer.username,
+  }
+}
+
+export default connect(mapStateToProps, null)(Dashboard)

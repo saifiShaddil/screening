@@ -23,7 +23,8 @@ router.post('/login', (req, res) => {
             bcrypt.compare(req.body.password, user.password, (error, match) => {
                 if (error) res.status(500).json(error)
                 else if (match){
-                    res.status(200).json({token: generatedToken(user)} )
+                    let token = generatedToken(user)
+                    res.status(200).json({token: token, id:user._id, email: user.email, username: user.name });
                 }
                 else res.status(403).json({error: 'passwords do not match'})
             })

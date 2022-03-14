@@ -34,19 +34,23 @@ const Form = (props) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
 
-  useEffect(() => {
-    toast.success("Registered Successfully. Please Login Now", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-    })
-  }, [props.user.registered === true])
+  console.log(props.user)
 
   useEffect(() => {
-    if (props.user.error !== "") {
+    if (props.user.registered === true) {
+      toast.success("Registered Successfully. Please Login Now", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+      })
+    }
+  }, [props.user.registered])
+
+  useEffect(() => {
+    if (props.user.error === true) {
       toast.success(props.user.errorMessage, {
         position: "top-right",
         autoClose: 5000,
@@ -56,7 +60,20 @@ const Form = (props) => {
         draggable: false,
       })
     }
-  }, [props.user.error === true])
+  }, [props.user.error])
+
+  useEffect(() => {
+    if (props.user.isAuthenticated) {
+      toast.success("Logged In Successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+      })
+    }
+  }, [props.user.isAuthenticated])
 
   return (
     <>

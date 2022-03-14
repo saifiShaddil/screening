@@ -31,9 +31,10 @@ import {
             payload: text.error
           })
         } else if(text.token) {
+          // console.log(text)
           dispatch({
             type: LOGIN_USER_SUCCESS,
-            payload: email
+            payload: text
           })
           localStorage.setItem("token", text.token)
           history('/dashboard')
@@ -64,7 +65,6 @@ import {
               type: REGISTER_USER_SUCCESS,
               payload: username
           })
-
           setTimeout(() =>{
             history('/')
           }, 1500)
@@ -94,7 +94,6 @@ import {
   
   
   export const logoutUserManual = () => async dispatch => {
-    dispatch(start_loading());
     try {
       localStorage.removeItem("token");
       dispatch({
@@ -105,7 +104,6 @@ import {
         type: LOGOUT_USER_FAIL
       })
     }
-    dispatch(stop_loading());
   }
   
   export const apiError = error => {
@@ -114,16 +112,4 @@ import {
       payload: error,
     }
   }
-  
-  export const logoutJWT = () => async dispatch =>{
-    
-    fetch(`${process.env.REACT_APP_API_URL}/logout/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    .then(response => response.json())
-    .catch(error => console.log(error))
-  }
+
