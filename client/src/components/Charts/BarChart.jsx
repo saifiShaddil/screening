@@ -29,6 +29,7 @@ export const options = {
     title: {
       display: true,
       text: "Growth",
+      position: "bottom",
       font: {
         size: 25,
       },
@@ -58,22 +59,23 @@ export const options = {
 
 const labels = ["India", "Oman", "US"]
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Range",
-      data: [25, 30, 15],
-      backgroundColor: [
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-    },
-  ],
-}
-
 const BarChart = () => {
+  const randomData = Array(3)
+    .fill()
+    .map(() => Math.round(Math.random() * 40))
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: randomData,
+        backgroundColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+      },
+    ],
+  }
   return <Bar options={options} data={data} width={400} height={200} />
 }
 
