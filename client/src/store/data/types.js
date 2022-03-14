@@ -1,0 +1,6 @@
+export const GET_DATA = "GET_DATA"
+export const GET_DATA1 = "GET_DATA1"
+export const POST_DATA= "POST_DATA"
+export const POST_DATA1= "POST_DATA1"
+export const API_ERROR_FAIL = "API_ERROR_FAIL"
+export const API_ERROR_FAIL1 = "API_ERROR_FAIL1"

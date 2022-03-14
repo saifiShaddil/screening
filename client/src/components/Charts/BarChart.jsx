@@ -1,5 +1,7 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Bar } from "react-chartjs-2"
+import { connect, useSelector } from "react-redux"
+import { getData, postData } from "../../store/actions"
 
 import {
   Chart as ChartJS,
@@ -57,17 +59,20 @@ export const options = {
   maintainAspectRatio: true,
 }
 
+export const randomData = Array(3)
+  .fill()
+  .map(() => Math.round(Math.random() * 40))
+
 const labels = ["India", "Oman", "US"]
 
-const BarChart = () => {
-  const randomData = Array(3)
-    .fill()
-    .map(() => Math.round(Math.random() * 40))
+const BarChart = ({ userData, getData, postData, user_id }) => {
+  const [res, setRes] = useState([])
+
   const data = {
     labels,
     datasets: [
       {
-        data: randomData,
+        data: res.length > 0 ? res : randomData,
         backgroundColor: [
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
@@ -76,7 +81,39 @@ const BarChart = () => {
       },
     ],
   }
+
+  useEffect(() => {
+    if (typeof userData === "object") {
+      if (userData?.length === 0) {
+        setTimeout(() => {
+          console.log(randomData)
+          postData(randomData)
+        }, 2000)
+      }
+    }
+
+    getData()
+  }, [user_id])
+
+  useEffect(() => {
+    if (typeof userData === "object") {
+      setRes(userData)
+    }
+    if (typeof userData === "string") {
+      let str = userData.split(",")
+      setRes(str)
+    }
+  }, [typeof userData === "string"])
+
   return <Bar options={options} data={data} width={400} height={200} />
 }
 
-export default BarChart
+const mapStateToProps = (state) => {
+  return {
+    user_id_: state.authReducer.id,
+    userData: state.dataReducer.data,
+    error: state.dataReducer.error,
+  }
+}
+
+export default connect(mapStateToProps, { getData, postData })(BarChart)

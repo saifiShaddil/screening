@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js"
 import { Pie } from "react-chartjs-2"
+import { connect } from "react-redux"
+import { PieChartGet, postPieChart } from "../../store/actions"
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -16,16 +18,18 @@ export const options = {
     },
   },
 }
+export const randomData = Array(3)
+  .fill()
+  .map(() => Math.round(Math.random() * 60))
 
-const PieChart = () => {
-  const randomData = Array(3)
-    .fill()
-    .map(() => Math.round(Math.random() * 60))
+const PieChart = ({ userData, PieChartGet, postPieChart, user_id }) => {
+  const [res, setRes] = useState([])
+
   const data = {
     labels: ["Red", "Blue", "Yellow"],
     datasets: [
       {
-        data: randomData,
+        data: res.length > 0 ? res : randomData,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -40,6 +44,28 @@ const PieChart = () => {
       },
     ],
   }
+  useEffect(() => {
+    if (typeof userData === "object") {
+      if (userData?.length === 0) {
+        setTimeout(() => {
+          postPieChart(randomData)
+        }, 2000)
+      }
+    }
+
+    PieChartGet()
+  }, [user_id])
+
+  useEffect(() => {
+    if (typeof userData === "object") {
+      setRes(userData)
+    }
+    if (typeof userData === "string") {
+      let str = userData.split(",")
+      setRes(str)
+    }
+  }, [typeof userData === "string"])
+
   return (
     <Pie
       data={data}
@@ -48,5 +74,11 @@ const PieChart = () => {
     />
   )
 }
-
-export default PieChart
+const mapStateToProps = (state) => {
+  return {
+    user_id_: state.authReducer.id,
+    userData: state.dataReducer.data1,
+    error: state.dataReducer.error,
+  }
+}
+export default connect(mapStateToProps, { PieChartGet, postPieChart })(PieChart)

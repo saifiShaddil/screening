@@ -9,4 +9,4 @@ const model = mongoose.Schema({
     }
 });
 
-module.exports = new mongoose.model("BarChart", model)
+module.exports = new mongoose.model("PieChart", model)
