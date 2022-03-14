@@ -1,8 +1,11 @@
 const mongoose = require('mongoose')
 
 const model = mongoose.Schema({
+    email: {
+        type: String,
+    },
     data: {
-        type: Number,
+        type: Array,
     }
 });
 

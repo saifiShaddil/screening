@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const authRoute = require("./routes/auth.route")
+const dataRoute = require("./routes/data.route")
 const dotenv = require('dotenv'); 
 const cors = require('cors');
 dotenv.config()
@@ -12,6 +13,7 @@ const  dbURI = process.env.DATABASEURL
 app.use(express.json())
 
 app.use('/api/auth', authRoute)
+app.use('/api/user-data', dataRoute)
 
 
 mongoose.connect(dbURI , {useNewUrlParser: true, useUnifiedTopology: true})
