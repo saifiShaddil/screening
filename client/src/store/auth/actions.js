@@ -7,6 +7,7 @@ import {
     LOGOUT_USER_FAIL,
     API_ERROR,
     LOGOUT,
+    API_ERROR_NULL
   } from "./types"
   // import jwt_decode from "jwt-decode"
   // import { stop_loading, start_loading } from "../actions"
@@ -25,19 +26,22 @@ import {
         },
         body: body
       }).then(response => response.json()).then(text=>{
+        console.log(text.error);
         if(text.error){
           dispatch({
             type: API_ERROR,
             payload: text.error
           })
         } else if(text.token) {
-          // console.log(text)
           dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: text
           })
           localStorage.setItem("token", text.token)
-          history('/dashboard')
+          setTimeout(() =>{
+            history('/dashboard')
+          }, 2500)
+          
         }
       }).catch(error => {
         dispatch({
@@ -110,6 +114,12 @@ import {
     return {
       type: API_ERROR,
       payload: error,
+    }
+  }
+
+  export const nullError = () => {
+    return {
+      type: API_ERROR_NULL,
     }
   }
 

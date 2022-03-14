@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { NavLink, useNavigate, Navigate } from "react-router-dom"
 import Header from "./Header"
-import { registerUserManual, loginUserManual } from "../store/actions"
+import {
+  registerUserManual,
+  loginUserManual,
+  nullError,
+} from "../store/actions"
 import { connect, useDispatch } from "react-redux"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -34,13 +38,11 @@ const Form = (props) => {
     setFormData({ ...formdata, [e.target.name]: e.target.value })
   }
 
-  console.log(props.user)
-
   useEffect(() => {
     if (props.user.registered === true) {
       toast.success("Registered Successfully. Please Login Now", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -50,16 +52,17 @@ const Form = (props) => {
   }, [props.user.registered])
 
   useEffect(() => {
-    if (props.user.error === true) {
-      toast.success(props.user.errorMessage, {
+    if (props.user.error !== "") {
+      toast.success(props.user.error, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: false,
       })
     }
+    props.nullError()
   }, [props.user.error])
 
   useEffect(() => {
@@ -80,7 +83,7 @@ const Form = (props) => {
       <Header />
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -187,4 +190,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   registerUserManual,
   loginUserManual,
+  nullError,
 })(Form)

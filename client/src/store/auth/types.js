@@ -6,8 +6,8 @@ export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS"
 export const LOGOUT_USER_FAIL = "LOGOUT_USER_FAIL"
 
 export const API_ERROR = "LOGIN_API_ERROR"
+export const API_ERROR_NULL = "LOGIN_API_ERROR_NULL"
 
-export const USER_FROM_LOCALSTORAGE = 'USER_FROM_LOCALSTORAGE'
 
 export const LOGOUT = "LOGOUT"
 export const Regsiter_User = "Regsiter_User"

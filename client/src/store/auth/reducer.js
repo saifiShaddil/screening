@@ -6,7 +6,7 @@ import {
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAIL,
     API_ERROR,
-    Regsiter_User
+    API_ERROR_NULL
   } from "./types"
   
   const initialState = {
@@ -15,7 +15,7 @@ import {
     name: "",
     registered:false,
     isAuthenticated: false,
-    error: false,
+    error: '',
     errorMessage: ''
   }
   
@@ -51,6 +51,13 @@ import {
           ...state,
           error: action.payload,
         }
+
+      case API_ERROR_NULL:
+        return {
+          ...state,
+          error: '',
+        }
+
       case LOGOUT_USER_SUCCESS:
         return {
           ...state,
