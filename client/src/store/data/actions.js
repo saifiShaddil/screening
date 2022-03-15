@@ -5,7 +5,7 @@ import {
   
   
   export const getData = () => dispatch => {
-        fetch(`http://localhost:5000/api/user-data/`, {
+        fetch(`${import.meta.env.VITE_API_VERSION}/user-data/`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ import {
   
   export const postData = (data) => async dispatch => {
     const body = JSON.stringify({ data: data.toString()})
-      fetch(`http://localhost:5000/api/user-data/`, {
+      fetch(`${import.meta.env.VITE_API_VERSION}/user-data/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ import {
   }
 
 export const PieChartGet = () => dispatch => {
-  fetch(`http://localhost:5000/api/user-data-pie/`, {
+  fetch(`${import.meta.env.VITE_API_VERSION}/user-data-pie/`, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const PieChartGet = () => dispatch => {
 
 export const postPieChart = () => async dispatch => {
   const body = JSON.stringify({ data: data.toString()})
-  fetch(`http://localhost:5000/api/user-data-pie/`, {
+  fetch(`${import.meta.env.VITE_API_VERSION}/user-data-pie/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
