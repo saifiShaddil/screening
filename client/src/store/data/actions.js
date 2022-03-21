@@ -4,7 +4,7 @@ import {
   
   
   export const getData = () => dispatch => {
-        fetch(`${import.meta.env.VITE_API_VERSION}/user-data/`, {
+        fetch(`${import.meta.env.VITE_API_VERSION}/user/`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ import {
   
   export const update_data = (data) => async dispatch => {
     const body = JSON.stringify({ data: data.toString()})
-      fetch(`${import.meta.env.VITE_API_VERSION}/user-data/`, {
+      fetch(`${import.meta.env.VITE_API_VERSION}/user/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ import {
   export const loginUserManual = ({ email, password }, history) => dispatch => {
     const body = JSON.stringify({ email, password })
   
-      fetch(`${import.meta.env.VITE_API_VERSION}/auth/login`, {
+      fetch(`${import.meta.env.VITE_API_VERSION}/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ import {
       username, email, password
     })
   
-    fetch(`${import.meta.env.VITE_API_VERSION}/auth/signup/`, {
+    fetch(`${import.meta.env.VITE_API_VERSION}/signup/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
