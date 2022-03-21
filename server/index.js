@@ -1,8 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const authRoute = require("./routes/auth.route")
-const BarChart = require("./routes/data.route")
-const PieChart = require("./routes/pie.route")
+const UserData = require("./routes/data.route")
 const dotenv = require('dotenv'); 
 const cors = require('cors');
 dotenv.config()
@@ -13,9 +12,8 @@ app.use(cors());
 const  dbURI = process.env.DATABASEURL
 app.use(express.json())
 
-app.use('/api/auth', authRoute)
-app.use('/api/user-data', BarChart)
-app.use('/api/user-data-pie', PieChart)
+app.use('/api', authRoute)
+app.use('/api/user', UserData)
 
 
 mongoose.connect(dbURI , {useNewUrlParser: true, useUnifiedTopology: true})
@@ -26,8 +24,5 @@ db.once("open", () => {console.log("DB started enjoy!!!!")})
 
 const PORT = process.env.PORT || 5000
 
-// app.get('/', (req, res) => {
-//     res.send("Working")
-// })
 
 app.listen(PORT, () => {console.log(`Sever live at https://localhost:${PORT}/api/auth`)})

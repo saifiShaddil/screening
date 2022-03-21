@@ -11,10 +11,6 @@ const tokenSecret = process.env.SECRET
 
 const middleware = require('../middleware/middleware')
 
-// router.get('/', (req, res) => {
-//     return res.json('Api is Live')
-// })
-
 router.post('/login', (req, res) => {
     User.findOne({email: req.body.email})
     .then(user => {

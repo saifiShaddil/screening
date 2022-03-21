@@ -14,7 +14,7 @@ import {
     email: "",
     name: "",
     registered:false,
-    isAuthenticated: false,
+    isAuthenticated: true,
     error: '',
     errorMessage: ''
   }

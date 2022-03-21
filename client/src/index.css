@@ -13,6 +13,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.glass-card {
+  
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

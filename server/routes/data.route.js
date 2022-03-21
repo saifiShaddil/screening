@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/', (req, res) => {
+router.patch('/', (req, res) => {
     const auth = req.headers['authorization']
     const token = auth.split(' ')[1]
     const userdata = jwt_decode(token)
@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
     .then(user => {
         if(!user) res.status(404).json({error: 'User not Found'})
         else {
-            const newData = Data({ email: userdata.data.email, data: req.body.data})
+            const newData = await Data.findOneAndUpdate({email: userdata.data.email}, req.body)
             newData.save()
             .then(val => {
                 res.status(200).json(val);

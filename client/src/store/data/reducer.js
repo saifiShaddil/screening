@@ -1,13 +1,11 @@
 import {
-    GET_DATA, POST_DATA, API_ERROR_FAIL,
-    GET_DATA1, POST_DATA1, API_ERROR_FAIL1
+    GET_DATA, GET_DATA_ERROR, UPDATE_DATA_ERROR, UPDATE_DATA
 } from "./types"
   
   const initialState = {
     data:[],
-    data1: [],
     error: '',
-    errorPieData: ''
+    updateError: '',
   }
   
   const dataReducer = (state = initialState, action) => {
@@ -20,32 +18,21 @@ import {
           ...state,
           data: payload,
         }
-      case POST_DATA:
+      case UPDATE_DATA:
         return {
           ...state,
           data: payload.data,
         }
 
-      case GET_DATA1:
-        return {
-          ...state,
-          data1: payload,
-        }
-      case POST_DATA1:
-        return {
-          ...state,
-          data1: payload.data,
-        }
-
-      case API_ERROR_FAIL:
+      case GET_DATA_ERROR:
         return {
           ...state,
           error: payload,
         }
-      case API_ERROR_FAIL1:
+      case UPDATE_DATA_ERROR:
         return {
           ...state,
-          errorPieData: payload,
+          updateError: payload,
         }
 
 

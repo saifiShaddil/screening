@@ -1,6 +1,7 @@
-import { Header, Form, Dashboard } from "./components"
+import { Header, Form, Dashboard, Home } from "./components"
 import { Navigate, Route, Routes } from "react-router-dom"
 import RequireAuth from "./ProtectedRoute"
+
 const App = () => {
   return (
     <>

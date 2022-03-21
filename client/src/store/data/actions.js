@@ -1,6 +1,5 @@
 import {
-    GET_DATA, POST_DATA, API_ERROR_FAIL ,
-    GET_DATA1, POST_DATA1, API_ERROR_FAIL1
+    GET_DATA, GET_DATA_ERROR, UPDATE_DATA, UPDATE_DATA_ERROR
   } from "./types"
   
   
@@ -14,7 +13,7 @@ import {
       }).then(response => response.json()).then(text=>{
         if(text.error){
           dispatch({
-            type: API_ERROR_FAIL,
+            type: GET_DATA_ERROR,
             payload: text.error
           })
         }
@@ -26,16 +25,16 @@ import {
         }
       }).catch(error => {
         dispatch({
-          type: API_ERROR_FAIL,
+          type: GET_DATA_ERROR,
           payload: error
         })
       })
   }
   
-  export const postData = (data) => async dispatch => {
+  export const update_data = (data) => async dispatch => {
     const body = JSON.stringify({ data: data.toString()})
       fetch(`${import.meta.env.VITE_API_VERSION}/user-data/`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -45,12 +44,12 @@ import {
         return response.json()
       }).then(text=>{
           dispatch({
-              type: POST_DATA,
+              type: UPDATE_DATA,
               payload: text
           })
       }).catch(error => {
         dispatch({
-          type: API_ERROR_FAIL,
+          type: UPDATE_DATA_ERROR,
           payload: error
         })
       }) 
@@ -58,56 +57,5 @@ import {
   
   }
 
-export const PieChartGet = () => dispatch => {
-  fetch(`${import.meta.env.VITE_API_VERSION}/user-data-pie/`, {
-    method: "GET",
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    },
-  }).then(response => response.json()).then(text=>{
-    if(text.error){
-      dispatch({
-        type: API_ERROR_FAIL1,
-        payload: text.error
-      })
-    }
-    if(text.length === 0 || text.length > 0) {
-      dispatch({
-        type: GET_DATA1,
-        payload: text
-      })
-    }
-  }).catch(error => {
-    dispatch({
-      type: API_ERROR_FAIL1,
-      payload: error
-    })
-  })
-}
 
-export const postPieChart = () => async dispatch => {
-  const body = JSON.stringify({ data: data.toString()})
-  fetch(`${import.meta.env.VITE_API_VERSION}/user-data-pie/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: body
-      }).then(response => {
-        return response.json()
-      }).then(text=>{
-          dispatch({
-              type: POST_DATA1,
-              payload: text
-          })
-      }).catch(error => {
-        dispatch({
-          type: API_ERROR_FAIL1,
-          payload: error
-        })
-      })
-
-}
   
