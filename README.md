@@ -10,11 +10,11 @@ This is the smaple scrreing app mainly for Authenticate the user and then Redire
 
 - Thers are two seprate folder for frontend and backend server
 - Client Folder service as Frontend
-> [fronted live url](https://the-awesome-saifishaddil-site.netlify.app/)
+> [Fronted Live URL](https://the-awesome-saifishaddil-site.netlify.app/)
 
 - Server folder service as backend
 - Backend as deployed to Heroku
-> [API LINK](https://profilersapp.herokuapp.com/api) 
+> [Heroku Server Link](https://profilersapp.herokuapp.com/api) 
 
 
 
