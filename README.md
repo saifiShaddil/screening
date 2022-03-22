@@ -8,7 +8,7 @@ This is the smaple scrreing app mainly for Authenticate the user and then Redire
 
 # Information
 
-- Thers are two seprate folder for fronyend and backend 
+- Thers are two seprate folder for frontend and backend server
 - Client Folder service as Frontend
 > [fronted live url](https://the-awesome-saifishaddil-site.netlify.app/)
 
