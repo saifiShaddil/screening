@@ -1,23 +1,29 @@
-const Header = () => {
+import { connect } from "react-redux"
+import { logoutUserManual } from "../store/actions"
+import { useNavigate } from "react-router-dom"
+
+const Header = ({ logoutUserManual }) => {
+  const history = useNavigate()
+  const handleLogout = () => {
+    logoutUserManual(history)
+  }
+
   return (
-    <header className="w-100 h-32 flex shadow-sm justify-center items-center bg-[#9ae98d65]">
-      <nav className="w-100 align-baseline text-white">
-        <h1
-          className="text-4xl font-bold"
-          style={{ letterSpacing: "3.2px", transform: "skew(-15deg, 0deg)" }}
+    <nav className="w-full flex justify-around py-5 mx-auto mb-3 shadow-sm bg-indigo-600 text-white">
+      <div className="flex items-center justify-around">
+        <h3 className="text-2xl md:text-3xl md font-medium">Profiler's</h3>
+      </div>
+
+      <div className="flex items-center space-x-3">
+        <button
+          onClick={handleLogout}
+          className="px-6 py-3 font-semibold border-xl text-indigo-600 trans-1 hover:shadow-md bg-white hover:text-white hover:bg-indigo-500 rounded-3xl"
         >
-          ARNOWA
-        </h1>
-        <p
-          className="font-bold text-[#2c472865] text-xs ml-8"
-          style={{ wordSpacing: "6.2px" }}
-        >
-          Smart <span className="text-red-400 mb-0 text-xs">Efficient</span>{" "}
-          Effective
-        </p>
-      </nav>
-    </header>
+          Logout
+        </button>
+      </div>
+    </nav>
   )
 }
 
-export default Header
+export default connect(null, { logoutUserManual })(Header)

@@ -9,7 +9,7 @@ dotenv.config()
 const app = express()
 app.use(cors());
 
-const  dbURI = process.env.DATABASEURL
+const dbURI = process.env.DATABASEURL
 app.use(express.json())
 
 app.use('/api', authRoute)

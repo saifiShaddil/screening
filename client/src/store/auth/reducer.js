@@ -6,17 +6,27 @@ import {
     LOGOUT_USER_SUCCESS,
     LOGOUT_USER_FAIL,
     API_ERROR,
-    API_ERROR_NULL
+    API_ERROR_NULL,
+    UPDATE_USER_FAIL,
+    UPDATE_USER,
+    GET_USER,
+    GET_USER_FAIL
   } from "./types"
   
   const initialState = {
     id: '',
     email: "",
     name: "",
+    age: "",
+    gender: "",
+    dob: "",
+    mobile: "",
     registered:false,
-    isAuthenticated: true,
+    isAuthenticated: false,
     error: '',
-    errorMessage: ''
+    errorMessage: '',
+    fetched: false,
+    updated: false,
   }
   
   const authReducer = (state = initialState, action) => {
@@ -43,7 +53,14 @@ import {
       case REGISTER_USER_SUCCESS:
         return {
           ...state,
-          name: payload,
+          id: payload._id,
+          name: payload.name,
+          email: payload.email,
+          dob: payload.dob,
+          age: payload.age,
+          gender: payload.gender, 
+          mobile: payload.mobile,
+          isAuthenticated: true,
           registered: true,
         }
       case API_ERROR:
@@ -62,12 +79,56 @@ import {
         return {
           ...state,
           id: '',
-          name: '',
-          email: '',
+          email: "",
+          name: "",
+          age: "",
+          gender: "",
+          dob: "",
+          mobile: "",
+          registered:false,
           isAuthenticated: false,
-          registered: false
+          error: '',
+          errorMessage: '',
+          fetched: false,
+          updated: false,
         }
 
+        case GET_USER:
+        return {
+          ...state,
+          name: payload.name,
+          email: payload.email,
+          dob: payload.dob,
+          age: payload.age,
+          gender: payload.gender, 
+          mobile: payload.mobile,
+          fetched : true,
+        }
+        case UPDATE_USER:
+          return {
+            ...state,
+            name: payload.name,
+            email: payload.email,
+            dob: payload.dob,
+            age: payload.age,
+            gender: payload.gender,
+            mobile: payload.mobile,
+            updated:true
+        }
+
+      case GET_USER_FAIL:
+        return {
+          ...state,
+          error: payload,
+          fetched: false
+
+        }
+      case UPDATE_USER_FAIL:
+        return {
+          ...state,
+          updateError: payload,
+          updated: false
+        }
       case REGISTER_USER_FAIL:
       case LOGIN_USER_FAIL:
       case LOGOUT_USER_FAIL:

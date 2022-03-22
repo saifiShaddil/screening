@@ -8,6 +8,10 @@ const model = mongoose.Schema({
         type: String,
         required: true
     },
+    dob : { type: String},
+    age : { type: Number},
+    gender : { type: String },
+    mobile : { type: Number},
     password: {
         type: String,
         required: true,

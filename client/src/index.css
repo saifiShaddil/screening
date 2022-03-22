@@ -13,8 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.glass-card {
-  
+.trans-1 {
+  transition: all 0.2s cubic-bezier(0.215, 0.610, 0.355, 1)
 }
 
 @tailwind base;

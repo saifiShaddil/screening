@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import { Navigate } from "react-router-dom"
-import { Dashboard } from "./components"
+import Dashboard from "./Pages/Dashboard"
 
 const RequireAuth = (isAuthenticated) => {
   if (isAuthenticated.isAuthenticated) {

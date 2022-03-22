@@ -48,7 +48,7 @@ router.post('/signup', (req, res) => {
 });
 
 const generatedToken = (user) => {
-    return jwt.sign({ data: user}, tokenSecret, { expiresIn: '24h' })
+    return jwt.sign({ data: user}, tokenSecret, { expiresIn: '12h' })
 }
 
 router.get('/jwt-test', middleware.verify , (req, res) => {

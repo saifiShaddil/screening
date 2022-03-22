@@ -7,9 +7,13 @@ import {
     LOGOUT_USER_FAIL,
     API_ERROR,
     LOGOUT,
-    API_ERROR_NULL
+    API_ERROR_NULL,
+    UPDATE_USER_FAIL,
+    UPDATE_USER,
+    GET_USER,
+    GET_USER_FAIL
   } from "./types"
-  // import jwt_decode from "jwt-decode"
+  import jwt_decode from "jwt-decode"
   // import { stop_loading, start_loading } from "../actions"
 
   
@@ -87,22 +91,26 @@ import {
   
   }
   
-  export const loadUserManual = () => async (dispatch) => {
+  export const loadUserManual = (history) => async (dispatch) => {
+   
     if(localStorage.getItem('token')){
+      const data = jwt_decode(localStorage.getItem('token'))
       dispatch({
         type: REGISTER_USER_SUCCESS,
-        payload: jwt_decode(localStorage.getItem('token'))
+        payload: data.data
       })
+      history('/dashboard')
     }
   }
   
   
-  export const logoutUserManual = () => async dispatch => {
+  export const logoutUserManual = (history) => async dispatch => {
     try {
       localStorage.removeItem("token");
       dispatch({
         type: LOGOUT_USER_SUCCESS
       })
+      history('/')
     } catch (error) {
       dispatch({
         type: LOGOUT_USER_FAIL
@@ -122,4 +130,61 @@ import {
       type: API_ERROR_NULL,
     }
   }
+
+
+  export const getData = () => async dispatch => {
+    fetch(`${import.meta.env.VITE_API_VERSION}/user/`, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+  }).then(response => response.json()).then(text=>{
+    if(text.error){
+      dispatch({
+        type: GET_USER_FAIL,
+        payload: text.error
+      })
+    }
+    else {
+      dispatch({
+        type: GET_USER,
+        payload: text
+      })
+    }
+  }).catch(error => {
+    dispatch({
+      type: GET_USER_FAIL,
+      payload: error
+    })
+  })
+}
+
+export const update_data = ({username, email, dob, age, gender, mobile}) => dispatch => {
+const body = JSON.stringify({ name: username, email: email, dob: dob, age: age, gender: gender, mobile: mobile })
+console.log(body)
+  fetch(`${import.meta.env.VITE_API_VERSION}/user/`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    },
+    body: body
+  }).then(response => {
+    return response.json()
+  }).then(text=>{
+      dispatch({
+          type: UPDATE_USER,
+          payload: text
+      })
+  }).catch(error => {
+    dispatch({
+      type: UPDATE_USER_FAIL,
+      payload: error
+    })
+  }) 
+  
+
+}
+
 
