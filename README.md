@@ -15,7 +15,7 @@ This is the Sample Profiler's app mainly for Authenticate the user and then Redi
 
 - Server folder id for backend API.
 - Backend is deployed to Heroku.
-> [Heroku Server Link](https://profilersapp.herokuapp.com/api) 
+> [Base API URL](https://profilersapp.herokuapp.com/api) 
 
 
 
