@@ -1,5 +1,5 @@
 # Screening Web App
-This is the smaple scrreing app mainly for Authenticate the user and then Redirect to Profile Page.
+This is the Sample Profiler's app mainly for Authenticate the user and then Redirect to Profile Page, where user can further add his info.
 
 # Requiremnt 
 * Node
