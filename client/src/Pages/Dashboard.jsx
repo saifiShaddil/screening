@@ -180,6 +180,7 @@ const Dashboard = ({ update_data, getData }) => {
                             Select Gender
                           </option>
                         )}
+                        <option>Select Gender</option>
                         <option>Female</option>
                         <option>Male</option>
                         <option>Transgender</option>

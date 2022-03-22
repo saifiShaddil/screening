@@ -10,7 +10,9 @@ import {
     UPDATE_USER_FAIL,
     UPDATE_USER,
     GET_USER,
-    GET_USER_FAIL
+    GET_USER_FAIL,
+    SIGN_UP,
+    SIGN_UP_FAIL
   } from "./types"
   
   const initialState = {
@@ -49,11 +51,22 @@ import {
           isAuthenticated: true,
           registered: false,
         }
+
+      case SIGN_UP_FAIL:
+        return {
+          ...state,
+          error: action.payload,
+        }
+
+      case SIGN_UP:
+        return {
+        ...state,
+        name: payload,
+      }
         
       case REGISTER_USER_SUCCESS:
         return {
           ...state,
-          id: payload._id,
           name: payload.name,
           email: payload.email,
           dob: payload.dob,

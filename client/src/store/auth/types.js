@@ -9,6 +9,8 @@ export const UPDATE_USER = "UPDATE_USER"
 export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL"
 export const GET_USER = "GET_USER"
 export const GET_USER_FAIL = "GET_USER_FAIL"
+export const SIGN_UP = "SIGN_UP"
+export const SIGN_UP_FAIL = "SIGN_UP_FAIL"
 
 export const API_ERROR = "LOGIN_API_ERROR"
 export const API_ERROR_NULL = "LOGIN_API_ERROR_NULL"

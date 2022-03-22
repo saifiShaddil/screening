@@ -62,7 +62,9 @@ const Login = (props) => {
   }, [props.user.isAuthenticated])
 
   useEffect(() => {
-    props.loadUserManual(history)
+    if (localStorage.getItem("token")) {
+      props.loadUserManual(history)
+    }
   }, [])
 
   return (

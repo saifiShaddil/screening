@@ -11,7 +11,9 @@ import {
     UPDATE_USER_FAIL,
     UPDATE_USER,
     GET_USER,
-    GET_USER_FAIL
+    GET_USER_FAIL,
+    SIGN_UP,
+    SIGN_UP_FAIL
   } from "./types"
   import jwt_decode from "jwt-decode"
   // import { stop_loading, start_loading } from "../actions"
@@ -70,7 +72,7 @@ import {
         body: body
       }).then(response => response.json()).then(text=>{
           dispatch({
-              type: REGISTER_USER_SUCCESS,
+              type: SIGN_UP,
               payload: username
           })
           setTimeout(() =>{
@@ -78,7 +80,7 @@ import {
           }, 1500)
       }).catch(error => {
         dispatch({
-          type: API_ERROR,
+          type: SIGN_UP_FAIL,
           payload: error
         })
         setTimeout(()=>{
