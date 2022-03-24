@@ -1,5 +1,5 @@
 # Screening Web App
-This is the smaple scrreing app mainly for Authenticate the user and then Redirect to Profile Page.
+This is the Sample Profiler's app mainly for Authenticate the user and then Redirect to Profile Page, where user can further add his info.
 
 # Requiremnt 
 * Node
@@ -8,13 +8,14 @@ This is the smaple scrreing app mainly for Authenticate the user and then Redire
 
 # Information
 
-- Thers are two seprate folder for fronyend and backend 
-- Client Folder service as Frontend
-> [fronted live url](https://the-awesome-saifishaddil-site.netlify.app/)
+- Thers are two seprate folder for frontend and backend server
+- Client Folder is for Frontend part
+- Frontend is hosted on Netlify.
+> [Fronted Live URL](https://the-awesome-saifishaddil-site.netlify.app/)
 
-- Server folder service as backend
-- Backend as deployed to Heroku
-> [API LINK](https://profilersapp.herokuapp.com/api) 
+- Server folder id for backend API.
+- Backend is deployed to Heroku.
+> [Base API URL](https://profilersapp.herokuapp.com/api) 
 
 
 
