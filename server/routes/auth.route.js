@@ -20,6 +20,7 @@ router.post('/login', (req, res) => {
                 if (error) res.status(500).json(error)
                 else if (match){
                     let token = generatedToken(user)
+                    console.log(user)
                     res.status(200).json({token: token, id:user._id, email: user.email, username: user.name });
                 }
                 else res.status(403).json({error: 'passwords do not match'})
@@ -35,14 +36,22 @@ router.post('/signup', (req, res) => {
     bcrypt.hash(req.body.password, rounds, (error, hash) => {
         if (error) res.status(500).json(error)
         else {
-            const newUser =  User({name: req.body.username ,email: req.body.email, password: hash})
-            newUser.save()
-                .then(user => {
-                    res.status(200).json({token: generatedToken(user)})
-                })
-                .catch(error => {
-                    res.status(500).json(error)
-                })
+            User.findOne({email: req.body.email}, (error, user) => {
+                if(error === null || error === undefined){
+                    const newUser =  User({name: req.body.username ,email: req.body.email, password: hash})
+                    newUser.save()
+                        .then(user => {
+                            res.status(200).json({token: generatedToken(user)})
+                        })
+                        .catch(error => {
+                            res.status(500).json(error)
+                        })
+                    
+                } 
+                if(user) {
+                    res.status(403).json({error: 'Email already Registered'});
+                }
+            })
         }
     })
 });

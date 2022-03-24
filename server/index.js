@@ -25,4 +25,4 @@ db.once("open", () => {console.log("DB started enjoy!!!!")})
 const PORT = process.env.PORT || 5000
 
 
-app.listen(PORT, () => {console.log(`Sever live at https://localhost:${PORT}/api/auth`)})
+app.listen(PORT, () => {console.log(`Sever live at https://localhost:${PORT}/api/`)})
